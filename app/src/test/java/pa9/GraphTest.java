@@ -5,7 +5,156 @@ package pa9;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.*;
 
-class GraphTest {
+public class GraphTest {
 
+    @Test
+    public void testHasNegativeCycleNoCycle() {
+        GraphList graph = new GraphList(3);
+        graph.addWeightedEdge(0, 1, 5);
+        graph.addWeightedEdge(1, 2, 3);
+        graph.addWeightedEdge(2, 0, 1);
+        assertFalse(graph.hasNegativeCycle());
+    }
+
+    @Test
+    public void testHasNegativeCycleWithCycle() {
+        GraphList graph = new GraphList(3);
+        graph.addWeightedEdge(0, 1, 1);
+        graph.addWeightedEdge(1, 2, -3);
+        graph.addWeightedEdge(2, 0, 1);
+        assertTrue(graph.hasNegativeCycle());
+    }
+
+    @Test
+    public void testMinimumSpanningTreeKruskal() {
+        GraphList graph = new GraphList(4);
+        graph.addWeightedEdge(0, 1, 10);
+        graph.addWeightedEdge(0, 2, 20);
+        graph.addWeightedEdge(1, 2, 5);
+        graph.addWeightedEdge(1, 3, 15);
+        graph.addWeightedEdge(2, 3, 30);
+        HashSet<Edge> mst = graph.minimumSpanningTreeKruskal();
+        assertEquals(3, mst.size());
+    }
+
+    @Test
+    public void testMinimumSpanningTreePrim() {
+        GraphList graph = new GraphList(4);
+        graph.addWeightedEdge(0, 1, 10);
+        graph.addWeightedEdge(0, 2, 20);
+        graph.addWeightedEdge(1, 2, 5);
+        graph.addWeightedEdge(1, 3, 15);
+        graph.addWeightedEdge(2, 3, 30);
+        HashSet<Edge> mst = graph.minimumSpanningTreePrim();
+        assertEquals(3, mst.size());
+    }
+
+    @Test
+    public void testMinimumSpanningTreePrimDisconnectedGraph() {
+        GraphList graph = new GraphList(5);
+        graph.addWeightedEdge(0, 1, 10);
+        graph.addWeightedEdge(1, 2, 5);
+        graph.addWeightedEdge(3, 4, 3);
+        HashSet<Edge> mst = graph.minimumSpanningTreePrim();
+        assertTrue(mst.size() > 0);
+    }
+
+    @Test
+    public void testMinimumSpanningTreeKruskalDisconnectedGraph() {
+        GraphList graph = new GraphList(5);
+        graph.addWeightedEdge(0, 1, 10);
+        graph.addWeightedEdge(1, 2, 5);
+        graph.addWeightedEdge(3, 4, 3);
+        HashSet<Edge> mst = graph.minimumSpanningTreeKruskal();
+        assertTrue(mst.size() > 0);
+    }
+
+    @Test
+    public void testEmptyGraph() {
+        GraphList graph = new GraphList(0);
+        assertFalse(graph.hasNegativeCycle());
+        assertEquals(0, graph.minimumSpanningTreePrim().size());
+        assertEquals(0, graph.minimumSpanningTreeKruskal().size());
+    }
+
+    @Test
+    public void testSingleVertexGraph() {
+        GraphList graph = new GraphList(1);
+        assertFalse(graph.hasNegativeCycle());
+        assertEquals(0, graph.minimumSpanningTreePrim().size());
+        assertEquals(0, graph.minimumSpanningTreeKruskal().size());
+    }
+
+    @Test
+    public void testMultipleEdgesBetweenSameVertices() {
+        GraphList graph = new GraphList(3);
+        graph.addWeightedEdge(0, 1, 5);
+        graph.addWeightedEdge(0, 1, 2);
+        graph.addWeightedEdge(1, 2, 3);
+        HashSet<Edge> mst = graph.minimumSpanningTreePrim();
+        assertEquals(2, mst.size());
+    }
+
+    @Test
+    public void testGraphWithZeroWeightEdge() {
+        GraphList graph = new GraphList(3);
+        graph.addWeightedEdge(0, 1, 0);
+        graph.addWeightedEdge(1, 2, 5);
+        HashSet<Edge> mst = graph.minimumSpanningTreePrim();
+        assertEquals(2, mst.size());
+    }
+
+    
+    @Test
+    public void testGraphWithNegativeWeights() {
+        GraphList graph = new GraphList(3);
+        graph.addWeightedEdge(0, 1, -10);
+        graph.addWeightedEdge(1, 2, -5);
+        graph.addWeightedEdge(2, 0, -3);
+        HashSet<Edge> mst = graph.minimumSpanningTreePrim();
+        assertEquals(2, mst.size());
+    }
+
+    @Test
+    public void testHasNegativeCycleLarge() {
+        GraphList graph = new GraphList(5);
+        graph.addWeightedEdge(0, 1, 5);
+        graph.addWeightedEdge(1, 2, 10);
+        graph.addWeightedEdge(2, 3, 2);
+        graph.addWeightedEdge(3, 4, -15);
+        graph.addWeightedEdge(4, 0, 3);
+        assertFalse(graph.hasNegativeCycle());
+    }
+
+    @Test
+    public void testNegativeCycleWithNeg() {
+        GraphList graph = new GraphList(4);
+        graph.addWeightedEdge(0, 1, 5);
+        graph.addWeightedEdge(1, 2, -10);
+        graph.addWeightedEdge(2, 3, 5);
+        graph.addWeightedEdge(3, 0, 2);
+        assertFalse(graph.hasNegativeCycle());
+    }
+
+    @Test
+    public void testShortestPathNoNegativeCycle() {
+        GraphList graph = new GraphList(3);
+        graph.addWeightedEdge(0, 1, 5);
+        graph.addWeightedEdge(1, 2, 3);
+        graph.addWeightedEdge(0, 2, 10);
+        int[] shortestPaths = graph.shortestPath(0);
+        assertArrayEquals(new int[]{0, 5, 8}, shortestPaths);
+    }
+
+
+    @Test
+    public void testShortestPathWithZeroWeight() {
+        GraphList graph = new GraphList(3);
+        graph.addWeightedEdge(0, 1, 0);
+        graph.addWeightedEdge(1, 2, 5);
+        int[] shortestPaths = graph.shortestPath(0);
+        assertArrayEquals(new int[]{0, 0, 5}, shortestPaths);
+    }
 }

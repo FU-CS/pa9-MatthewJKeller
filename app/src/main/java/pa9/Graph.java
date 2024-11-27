@@ -1,4 +1,5 @@
 package pa9;
+import java.util.*;
 /** 
  * Graph interface for a directed, connected graph with vertices numbered from 0 to n-1.
  * For weighted graphs, the default weight of each edge is assumed to be 1.
@@ -34,11 +35,11 @@ interface Graph {
     /**
      * Find the minimum spanning tree of the graph, using Kruskal's algorithm.
      */
-    public int[] minimumSpanningTree();
+    public HashSet<Edge> minimumSpanningTree();
 
     /**
      * Find the minimum spanning tree of the graph, using Prim's algorithm.
      */
-    public int[] minimumSpanningTreePrim();
+    public  HashSet<Edge> minimumSpanningTreePrim();
 
 }
