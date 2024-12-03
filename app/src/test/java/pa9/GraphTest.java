@@ -28,14 +28,14 @@ public class GraphTest {
     }
 
     @Test
-    public void testMinimumSpanningTreeKruskal() {
+    public void testminimumSpanningTree() {
         GraphList graph = new GraphList(4);
         graph.addWeightedEdge(0, 1, 10);
         graph.addWeightedEdge(0, 2, 20);
         graph.addWeightedEdge(1, 2, 5);
         graph.addWeightedEdge(1, 3, 15);
         graph.addWeightedEdge(2, 3, 30);
-        HashSet<Edge> mst = graph.minimumSpanningTreeKruskal();
+        HashSet<Edge> mst = graph.minimumSpanningTree();
         assertEquals(3, mst.size());
     }
 
@@ -62,12 +62,12 @@ public class GraphTest {
     }
 
     @Test
-    public void testMinimumSpanningTreeKruskalDisconnectedGraph() {
+    public void testminimumSpanningTreeDisconnectedGraph() {
         GraphList graph = new GraphList(5);
         graph.addWeightedEdge(0, 1, 10);
         graph.addWeightedEdge(1, 2, 5);
         graph.addWeightedEdge(3, 4, 3);
-        HashSet<Edge> mst = graph.minimumSpanningTreeKruskal();
+        HashSet<Edge> mst = graph.minimumSpanningTree();
         assertTrue(mst.size() > 0);
     }
 
@@ -76,7 +76,7 @@ public class GraphTest {
         GraphList graph = new GraphList(0);
         assertFalse(graph.hasNegativeCycle());
         assertEquals(0, graph.minimumSpanningTreePrim().size());
-        assertEquals(0, graph.minimumSpanningTreeKruskal().size());
+        assertEquals(0, graph.minimumSpanningTree().size());
     }
 
     @Test
@@ -84,7 +84,7 @@ public class GraphTest {
         GraphList graph = new GraphList(1);
         assertFalse(graph.hasNegativeCycle());
         assertEquals(0, graph.minimumSpanningTreePrim().size());
-        assertEquals(0, graph.minimumSpanningTreeKruskal().size());
+        assertEquals(0, graph.minimumSpanningTree().size());
     }
 
     @Test

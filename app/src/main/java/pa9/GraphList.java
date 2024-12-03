@@ -2,7 +2,7 @@ package pa9;
 import java.util.*;
 
 
-public class GraphList {
+public class GraphList implements Graph{
     private int vertices; // Number of vertices
     private List<List<Edge>> adjacencyList; // Adjacency list for the graph
 
@@ -125,7 +125,7 @@ public class GraphList {
         }
         return T;
     }
-    public HashSet<Edge> minimumSpanningTreeKruskal(){
+    public HashSet<Edge> minimumSpanningTree(){
         HashSet<Edge> mst = new HashSet<>();
 
         if(vertices == 0){
