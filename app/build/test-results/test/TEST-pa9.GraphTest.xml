@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="pa9.GraphTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2024-12-03T16:08:50" hostname="LAPTOP-DI0PVVNV" time="0.068">
+  <properties/>
+  <testcase name="testSingleVertexGraph()" classname="pa9.GraphTest" time="0.025"/>
+  <testcase name="testEmptyGraph()" classname="pa9.GraphTest" time="0.001"/>
+  <testcase name="testGraphWithZeroWeightEdge()" classname="pa9.GraphTest" time="0.001"/>
+  <testcase name="testHasNegativeCycleWithCycle()" classname="pa9.GraphTest" time="0.002"/>
+  <testcase name="testHasNegativeCycleNoCycle()" classname="pa9.GraphTest" time="0.0"/>
+  <testcase name="testGraphWithNegativeWeights()" classname="pa9.GraphTest" time="0.001"/>
+  <testcase name="testminimumSpanningTree()" classname="pa9.GraphTest" time="0.001"/>
+  <testcase name="testMinimumSpanningTreePrim()" classname="pa9.GraphTest" time="0.0"/>
+  <testcase name="testShortestPathNoNegativeCycle()" classname="pa9.GraphTest" time="0.003"/>
+  <testcase name="testminimumSpanningTreeDisconnectedGraph()" classname="pa9.GraphTest" time="0.001"/>
+  <testcase name="testShortestPathWithZeroWeight()" classname="pa9.GraphTest" time="0.0"/>
+  <testcase name="testMultipleEdgesBetweenSameVertices()" classname="pa9.GraphTest" time="0.0"/>
+  <testcase name="testMinimumSpanningTreePrimDisconnectedGraph()" classname="pa9.GraphTest" time="0.0"/>
+  <testcase name="testNegativeCycleWithNeg()" classname="pa9.GraphTest" time="0.0"/>
+  <testcase name="testHasNegativeCycleLarge()" classname="pa9.GraphTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
